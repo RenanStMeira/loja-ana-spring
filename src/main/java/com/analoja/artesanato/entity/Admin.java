@@ -12,7 +12,7 @@ import javax.persistence.Id;
 
 @Data
 @Entity
-@Table(schema = "LojaAna", name = "Admin")
+@Table(name = "Admin")
 public class Admin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

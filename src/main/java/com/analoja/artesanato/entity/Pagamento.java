@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Data
 @Entity
-@Table(schema = "LojaAna", name = "Pagamento")
+@Table(name = "Pagamento")
 public class Pagamento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

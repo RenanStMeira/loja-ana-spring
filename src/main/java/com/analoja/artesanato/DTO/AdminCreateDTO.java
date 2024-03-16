@@ -6,7 +6,8 @@ import lombok.Data;
 import javax.validation.constraints.NotNull;
 
 @Data
-public class AdminCreateDTO {
+public class
+AdminCreateDTO {
 
     @NotNull
     @Schema(description = "Nome do administrador", example = "João da Silva", required = true)

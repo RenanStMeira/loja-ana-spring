@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(schema = "LojaAna", name = "Cliente")
+@Table(name = "Cliente")
 public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,6 +35,7 @@ public class Cliente {
 
     @Column(name = "Senha")
     private String senha;
+
     @OneToMany(mappedBy = "cliente")
     private List<Login> logins;
 }
