@@ -1,5 +1,6 @@
 package com.analoja.artesanato.DTO;
 
+import com.analoja.artesanato.entity.Produto;
 import com.analoja.artesanato.enums.Categoria;
 import com.analoja.artesanato.enums.Cor;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -7,6 +8,7 @@ import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 public class ProdutoCreateDTO {
@@ -23,9 +25,4 @@ public class ProdutoCreateDTO {
     @Schema(description = "Preço do produto", example = "100.00")
     private BigDecimal preco;
 
-    @NotNull
-    private Categoria categoria;
-
-    @NotNull
-    private Cor cor;
 }
