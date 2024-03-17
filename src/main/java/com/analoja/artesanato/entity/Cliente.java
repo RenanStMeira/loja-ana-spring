@@ -37,5 +37,10 @@ public class Cliente {
     private String senha;
 
     @OneToMany(mappedBy = "cliente")
-    private List<Login> logins;
+    private List<Login> login;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "endereco_id", referencedColumnName = "id")
+    private Endereco endereco;
+
 }

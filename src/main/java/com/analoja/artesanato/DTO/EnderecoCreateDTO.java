@@ -9,9 +9,9 @@ import javax.validation.constraints.NotNull;
 
 @Data
 public class EnderecoCreateDTO {
-
-    @NotNull
-    private Cliente cliente;
+//
+//    @NotNull
+//    private Cliente cliente;
 
     @NotNull
     @Schema(description = "Rua do endereço", example = "Rua das Flores")

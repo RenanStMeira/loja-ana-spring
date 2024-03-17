@@ -1,15 +1,15 @@
 package com.analoja.artesanato.DTO;
 
-import com.analoja.artesanato.entity.Login;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 import java.util.Date;
-import java.util.List;
 
 @Data
-public class ClienteCreateDTO {
+public class ClienteResponseDTO {
+
+    private Integer idCliente;
 
     @NotNull
     @Schema(description = "Nome do cliente", example = "João", required = true)
@@ -40,5 +40,4 @@ public class ClienteCreateDTO {
     private String senha;
 
     private EnderecoCreateDTO endereco;
-
 }
