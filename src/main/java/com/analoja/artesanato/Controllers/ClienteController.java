@@ -22,8 +22,14 @@ public class ClienteController {
 
     @GetMapping
     public ResponseEntity<Page<Cliente>> findAll(Pageable pageable) throws RegraDeNegocioException {
-        Page<Cliente> clientes = clienteService.findAll(pageable);
+        Page<Cliente> clientes = clienteService.buscarTodosClientes(pageable);
         return new ResponseEntity<>(clientes, HttpStatus.OK);
+    }
+
+    @GetMapping("/{idCliente}")
+    public ResponseEntity<Cliente> findById(@PathVariable("idCliente") Integer idCliente) throws RegraDeNegocioException {
+        Cliente cliente = clienteService.buscarPorId(idCliente);
+        return new ResponseEntity<>(cliente, HttpStatus.OK);
     }
 
     @PostMapping("/cadastrar")
@@ -36,5 +42,11 @@ public class ClienteController {
     public ResponseEntity<Cliente> atualizarClienteResponseEntity(@PathVariable Integer idCliente, @RequestBody ClienteCreateDTO clienteCreateDTO) throws RegraDeNegocioException {
         Cliente cliente = clienteService.atualizarCliente(idCliente, clienteCreateDTO);
         return new ResponseEntity<>(cliente, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/deletar/{idCliente}")
+    public ResponseEntity<Void> deletarClienteResponseEntity(@PathVariable Integer idCliente) throws RegraDeNegocioException {
+        clienteService.deletarCliente(idCliente);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

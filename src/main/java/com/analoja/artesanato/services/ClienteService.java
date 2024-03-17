@@ -62,7 +62,9 @@ public class ClienteService {
     }
 
     public Cliente atualizarCliente(Integer idCliente, ClienteCreateDTO clienteDTO) throws RegraDeNegocioException {
-        Cliente clienteRecuperado = findById(idCliente);
+        existsId(idCliente);
+
+        Cliente clienteRecuperado = buscarPorId(idCliente);
 
         clienteRecuperado.setNome(clienteDTO.getNome());
         clienteRecuperado.setSobrenome(clienteDTO.getSobrenome());
@@ -86,16 +88,29 @@ public class ClienteService {
         return clienteRepository.save(clienteRecuperado);
     }
 
-    public Page<Cliente> findAll(Pageable pageable){
+    public Page<Cliente> buscarTodosClientes(Pageable pageable){
         Pageable pageableOrdenadoPorId = PageRequest.of(pageable.getPageNumber(),
                 pageable.getPageSize(),
                 Sort.by("idCliente"));
         return clienteRepository.findAll(pageableOrdenadoPorId);
     }
 
-    public Cliente findById(Integer idCliente) throws RegraDeNegocioException {
+    public Cliente buscarPorId(Integer idCliente) throws RegraDeNegocioException {
+        existsId(idCliente);
+
         return clienteRepository.findById(idCliente)
                 .orElseThrow(() -> new RegraDeNegocioException("Cliente não encontrado"));
+    }
+
+    public void deletarCliente(Integer idCliente) throws RegraDeNegocioException {
+        existsId(idCliente);
+        Cliente cliente = buscarPorId(idCliente);
+        clienteRepository.delete(cliente);
+    }
+
+    private Cliente existsId(Integer idCliente) throws RegraDeNegocioException {
+        return clienteRepository.findById(idCliente)
+                .orElseThrow(() -> new RegraDeNegocioException("ID não encontrado"));
     }
 
 }
