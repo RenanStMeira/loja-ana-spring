@@ -2,16 +2,15 @@ package com.analoja.artesanato.DTO;
 
 import com.analoja.artesanato.entity.Cliente;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 
-
+@AllArgsConstructor
 @Data
 public class EnderecoCreateDTO {
-//
-//    @NotNull
-//    private Cliente cliente;
+
 
     @NotNull
     @Schema(description = "Rua do endereço", example = "Rua das Flores")
@@ -32,4 +31,5 @@ public class EnderecoCreateDTO {
     @NotNull
     @Schema(description = "CEP do endereço", example = "12345-678")
     private String cep;
+
 }
