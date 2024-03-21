@@ -17,20 +17,20 @@ public class PedidoCreateDTO {
     private Date data;
 
     @NotNull
-    private Cliente cliente;
+    private Integer idCliente;
 
     @NotNull
-    private Produto produto;
+    private Integer idProduto;
 
     @NotNull
     @Schema(description = "Quantidade do produto", example = "2")
     private Integer quantidade;
 
     @NotNull
-    @Schema(description = "Preço total do pedido", example = "100.00")
-    private BigDecimal preco_total;
-
-    @NotNull
     @Schema(description = "Status do pedido", example = "Em andamento")
     private String status;
+
+    public Integer getCliente() {
+        return idCliente;
+    }
 }
