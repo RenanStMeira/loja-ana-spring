@@ -7,9 +7,8 @@ import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 
-
 @Data
-public class LoginCreateDTO {
+public class LoginDTO {
 
     @NotNull
     @Schema(description = "Email do login", example = "login@email.com", required = true)
@@ -19,7 +18,6 @@ public class LoginCreateDTO {
     @Schema(description = "Senha do login", example = "senha123", required = true)
     private String senha;
 
-
-    private Cliente cliente;
-    private Admin admin;
+//    private Cliente cliente;
+//    private Admin admin;
 }

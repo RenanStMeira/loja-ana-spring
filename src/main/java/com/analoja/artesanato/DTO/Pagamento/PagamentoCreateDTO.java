@@ -1,6 +1,5 @@
 package com.analoja.artesanato.DTO.Pagamento;
 
-import com.analoja.artesanato.entity.Cliente;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -11,7 +10,8 @@ import java.util.Date;
 public class PagamentoCreateDTO {
 
     @NotNull
-    private Cliente cliente;
+    @Schema(description = "ID do cliente", example = "1")
+    private Integer cliente;
 
     @NotNull
     @Schema(description = "Número do cartão", example = "1234 5678 1234 5678")
@@ -24,4 +24,5 @@ public class PagamentoCreateDTO {
     @NotNull
     @Schema(description = "CVV do cartão", example = "123")
     private Integer cvv;
+
 }

@@ -1,5 +1,6 @@
 package com.analoja.artesanato.security;
 
+import com.analoja.artesanato.entity.Cliente;
 import com.analoja.artesanato.services.ClienteService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -28,5 +29,9 @@ public class TokenService {
             }
         }
         return null;
+    }
+
+    public String generateToken(Cliente usuarioValidado) {
+        return TOKEN_PREFIX + tokenGenerator.generateToken(usuarioValidado);
     }
 }
