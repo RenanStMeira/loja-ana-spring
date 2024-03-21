@@ -1,6 +1,6 @@
 package com.analoja.artesanato.services;
 
-import com.analoja.artesanato.DTO.ProdutoCreateDTO;
+import com.analoja.artesanato.DTO.Produto.ProdutoCreateDTO;
 import com.analoja.artesanato.entity.Produto;
 import com.analoja.artesanato.enums.Categoria;
 import com.analoja.artesanato.enums.Cor;
@@ -13,8 +13,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @RequiredArgsConstructor
 @Service

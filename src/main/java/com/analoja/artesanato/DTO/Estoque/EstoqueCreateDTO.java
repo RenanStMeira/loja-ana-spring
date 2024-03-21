@@ -1,4 +1,4 @@
-package com.analoja.artesanato.DTO;
+package com.analoja.artesanato.DTO.Estoque;
 
 import com.analoja.artesanato.entity.Produto;
 import io.swagger.v3.oas.annotations.media.Schema;

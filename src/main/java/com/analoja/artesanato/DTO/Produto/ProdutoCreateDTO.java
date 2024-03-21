@@ -1,4 +1,4 @@
-package com.analoja.artesanato.DTO;
+package com.analoja.artesanato.DTO.Produto;
 
 import com.analoja.artesanato.entity.Produto;
 import com.analoja.artesanato.enums.Categoria;

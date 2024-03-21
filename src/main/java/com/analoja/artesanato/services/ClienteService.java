@@ -1,7 +1,7 @@
 package com.analoja.artesanato.services;
 
-import com.analoja.artesanato.DTO.ClienteCreateDTO;
-import com.analoja.artesanato.DTO.EnderecoCreateDTO;
+import com.analoja.artesanato.DTO.Cliente.ClienteCreateDTO;
+import com.analoja.artesanato.DTO.Cliente.ClienteResponseDTO;
 import com.analoja.artesanato.entity.Cliente;
 import com.analoja.artesanato.entity.Endereco;
 import com.analoja.artesanato.exceptions.RegraDeNegocioException;
@@ -28,12 +28,19 @@ public class ClienteService {
     private final EnderecoRepository enderecoRepository;
     private final ObjectMapper objectMapper;
 
+    private static final String CLIENTE_NAO_ENCONTRADO = "Cliente não encontrado";
+    private static final String ID_NAO_ENCONTRADO = "ID não encontrado";
+    private static final String CPF_NAO_ENCONTRADO = "CPF não encontrado";
+    private static final String EMAIL_NAO_ENCONTRADO = "Email não encontrado";
+
+
+
     public Optional<Cliente> findByLogin(String username) {
         return clienteRepository.findByLogin(username);
     }
 
     @Transactional
-    public Cliente cadastrarCliente(ClienteCreateDTO clienteDTO) throws RegraDeNegocioException {
+    public ClienteResponseDTO cadastrarCliente(ClienteCreateDTO clienteDTO) throws RegraDeNegocioException {
         Cliente cliente = new Cliente();
         Endereco endereco = new Endereco();
 
@@ -58,7 +65,7 @@ public class ClienteService {
         Endereco savedEndereco = enderecoRepository.save(endereco);
 
         savedCliente.setEndereco(savedEndereco);
-        return clienteRepository.save(savedCliente);
+        return objectMapper.convertValue(clienteRepository.save(savedCliente), ClienteResponseDTO.class);
     }
 
     public Cliente atualizarCliente(Integer idCliente, ClienteCreateDTO clienteDTO) throws RegraDeNegocioException {
@@ -75,6 +82,7 @@ public class ClienteService {
         clienteRecuperado.setSenha(passwordEncoder.encode(clienteDTO.getSenha()));
 
         Endereco enderecoRecuperado = clienteRecuperado.getEndereco();
+
         enderecoRecuperado.setRua(clienteDTO.getEndereco().getRua());
         enderecoRecuperado.setNumero(clienteDTO.getEndereco().getNumero());
         enderecoRecuperado.setCidade(clienteDTO.getEndereco().getCidade());
@@ -88,7 +96,21 @@ public class ClienteService {
         return clienteRepository.save(clienteRecuperado);
     }
 
-    public Page<Cliente> buscarTodosClientes(Pageable pageable){
+    public Cliente buscarClientePorCpf(String cpf) throws RegraDeNegocioException {
+        cpfExists(cpf);
+
+        return clienteRepository.findByCpf(cpf)
+                .orElseThrow(() -> new RegraDeNegocioException(CLIENTE_NAO_ENCONTRADO ));
+    }
+
+    public Cliente buscarClientePorEmail(String email) throws RegraDeNegocioException {
+        emailExists(email);
+
+        return clienteRepository.findByEmail(email)
+                .orElseThrow(() -> new RegraDeNegocioException(CLIENTE_NAO_ENCONTRADO ));
+    }
+
+    public Page<Cliente> buscarTodosClientes(Pageable pageable) throws RegraDeNegocioException {
         Pageable pageableOrdenadoPorId = PageRequest.of(pageable.getPageNumber(),
                 pageable.getPageSize(),
                 Sort.by("idCliente"));
@@ -99,7 +121,7 @@ public class ClienteService {
         existsId(idCliente);
 
         return clienteRepository.findById(idCliente)
-                .orElseThrow(() -> new RegraDeNegocioException("Cliente não encontrado"));
+                .orElseThrow(() -> new RegraDeNegocioException(CLIENTE_NAO_ENCONTRADO ));
     }
 
     public void deletarCliente(Integer idCliente) throws RegraDeNegocioException {
@@ -110,7 +132,17 @@ public class ClienteService {
 
     private Cliente existsId(Integer idCliente) throws RegraDeNegocioException {
         return clienteRepository.findById(idCliente)
-                .orElseThrow(() -> new RegraDeNegocioException("ID não encontrado"));
+                .orElseThrow(() -> new RegraDeNegocioException(ID_NAO_ENCONTRADO));
+    }
+
+    private Cliente cpfExists(String cpf) throws RegraDeNegocioException {
+        return clienteRepository.findByCpf(cpf)
+                .orElseThrow(() -> new RegraDeNegocioException(CPF_NAO_ENCONTRADO));
+    }
+
+    private Cliente emailExists(String email) throws RegraDeNegocioException {
+        return clienteRepository.findByEmail(email)
+                .orElseThrow(() -> new RegraDeNegocioException(EMAIL_NAO_ENCONTRADO));
     }
 
 }

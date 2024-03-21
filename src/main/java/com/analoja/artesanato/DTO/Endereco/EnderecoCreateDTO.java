@@ -1,4 +1,4 @@
-package com.analoja.artesanato.DTO;
+package com.analoja.artesanato.DTO.Endereco;
 
 import com.analoja.artesanato.entity.Cliente;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -11,6 +11,8 @@ import javax.validation.constraints.NotNull;
 @Data
 public class EnderecoCreateDTO {
 
+    @NotNull
+    private Integer idCliente;
 
     @NotNull
     @Schema(description = "Rua do endereço", example = "Rua das Flores")

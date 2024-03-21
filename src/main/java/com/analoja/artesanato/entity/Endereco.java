@@ -1,5 +1,6 @@
 package com.analoja.artesanato.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -13,7 +14,8 @@ public class Endereco {
     @Column(name = "ID")
     private Integer idEndereco;
 
-    @ManyToOne
+    @OneToOne(mappedBy = "endereco")
+    @JsonBackReference
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
@@ -31,4 +33,9 @@ public class Endereco {
 
     @Column(name = "CEP")
     private String cep;
+
+    @ManyToOne
+    @JoinColumn(name = "admin_id", referencedColumnName = "ID")
+    private Admin admin;
+
 }

@@ -1,12 +1,11 @@
-package com.analoja.artesanato.DTO;
+package com.analoja.artesanato.DTO.Cliente;
 
-import com.analoja.artesanato.entity.Login;
+import com.analoja.artesanato.DTO.Endereco.EnderecoCreateDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 import java.util.Date;
-import java.util.List;
 
 @Data
 public class ClienteCreateDTO {

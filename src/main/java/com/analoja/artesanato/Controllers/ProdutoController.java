@@ -1,6 +1,6 @@
 package com.analoja.artesanato.Controllers;
 
-import com.analoja.artesanato.DTO.ProdutoCreateDTO;
+import com.analoja.artesanato.DTO.Produto.ProdutoCreateDTO;
 import com.analoja.artesanato.entity.Produto;
 import com.analoja.artesanato.enums.Categoria;
 import com.analoja.artesanato.enums.Cor;

@@ -1,6 +1,6 @@
 package com.analoja.artesanato.services;
 
-import com.analoja.artesanato.DTO.AdminCreateDTO;
+import com.analoja.artesanato.DTO.Admin.AdminCreateDTO;
 import com.analoja.artesanato.entity.Admin;
 import com.analoja.artesanato.exceptions.RegraDeNegocioException;
 import com.analoja.artesanato.repository.AdminRepository;

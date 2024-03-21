@@ -1,4 +1,4 @@
-package com.analoja.artesanato.DTO;
+package com.analoja.artesanato.DTO.Login;
 
 import com.analoja.artesanato.entity.Admin;
 import com.analoja.artesanato.entity.Cliente;

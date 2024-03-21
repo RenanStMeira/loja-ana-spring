@@ -1,6 +1,7 @@
 package com.analoja.artesanato.Controllers;
 
-import com.analoja.artesanato.DTO.ClienteCreateDTO;
+import com.analoja.artesanato.DTO.Cliente.ClienteCreateDTO;
+import com.analoja.artesanato.DTO.Cliente.ClienteResponseDTO;
 import com.analoja.artesanato.entity.Cliente;
 import com.analoja.artesanato.exceptions.RegraDeNegocioException;
 import com.analoja.artesanato.services.ClienteService;
@@ -21,20 +22,32 @@ public class ClienteController {
     private final ClienteService clienteService;
 
     @GetMapping
-    public ResponseEntity<Page<Cliente>> findAll(Pageable pageable) throws RegraDeNegocioException {
+    public ResponseEntity<Page<Cliente>> buscarTodosClientes(Pageable pageable) throws RegraDeNegocioException {
         Page<Cliente> clientes = clienteService.buscarTodosClientes(pageable);
         return new ResponseEntity<>(clientes, HttpStatus.OK);
     }
 
     @GetMapping("/{idCliente}")
-    public ResponseEntity<Cliente> findById(@PathVariable("idCliente") Integer idCliente) throws RegraDeNegocioException {
+    public ResponseEntity<Cliente> byscarPorId(@PathVariable("idCliente") Integer idCliente) throws RegraDeNegocioException {
         Cliente cliente = clienteService.buscarPorId(idCliente);
         return new ResponseEntity<>(cliente, HttpStatus.OK);
     }
 
+    @GetMapping("/buscarPorEmail/{email}")
+    public ResponseEntity<Cliente> buscarPorEmail(@PathVariable("email") String email) throws RegraDeNegocioException {
+        Cliente cliente = clienteService.buscarClientePorEmail(email);
+        return new ResponseEntity<>(cliente, HttpStatus.OK);
+    }
+
+    @GetMapping("/buscarPorCpf/{cpf}")
+    public ResponseEntity<Cliente> buscarPorCpf(@PathVariable("cpf") String cpf) throws RegraDeNegocioException {
+        Cliente cliente = clienteService.buscarClientePorCpf(cpf);
+        return new ResponseEntity<>(cliente, HttpStatus.OK);
+    }
+
     @PostMapping("/cadastrar")
-    public ResponseEntity<Cliente> cadatrarClienteResponseEntity(@RequestBody ClienteCreateDTO clienteCreateDTO) throws RegraDeNegocioException {
-        Cliente cliente = clienteService.cadastrarCliente(clienteCreateDTO);
+    public ResponseEntity<ClienteResponseDTO> cadatrarClienteResponseEntity(@RequestBody ClienteCreateDTO clienteCreateDTO) throws RegraDeNegocioException {
+        ClienteResponseDTO cliente = clienteService.cadastrarCliente(clienteCreateDTO);
         return new ResponseEntity<>(cliente, HttpStatus.CREATED);
     }
 

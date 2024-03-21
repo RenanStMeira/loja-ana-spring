@@ -1,4 +1,4 @@
-package com.analoja.artesanato.DTO;
+package com.analoja.artesanato.DTO.Admin;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

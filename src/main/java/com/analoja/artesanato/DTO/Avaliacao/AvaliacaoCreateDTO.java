@@ -1,4 +1,4 @@
-package com.analoja.artesanato.DTO;
+package com.analoja.artesanato.DTO.Avaliacao;
 
 import com.analoja.artesanato.entity.Cliente;
 import com.analoja.artesanato.entity.Produto;

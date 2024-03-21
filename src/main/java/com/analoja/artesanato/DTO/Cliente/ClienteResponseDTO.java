@@ -1,6 +1,7 @@
-package com.analoja.artesanato.entity;
+package com.analoja.artesanato.DTO.Cliente;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.analoja.artesanato.entity.Endereco;
+import com.analoja.artesanato.entity.Login;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -10,7 +11,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "Cliente")
-public class Cliente {
+public class ClienteResponseDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
@@ -37,12 +38,7 @@ public class Cliente {
     @Column(name = "Senha")
     private String senha;
 
-    @OneToMany(mappedBy = "cliente")
-    private List<Login> login;
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "endereco_id", referencedColumnName = "id")
-    @JsonManagedReference
     private Endereco endereco;
-
 }
