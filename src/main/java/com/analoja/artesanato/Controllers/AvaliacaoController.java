@@ -1,5 +1,6 @@
 package com.analoja.artesanato.Controllers;
 
+import com.analoja.artesanato.DTO.Avaliacao.AvaliacaoCreateDTO;
 import com.analoja.artesanato.entity.Avaliacao;
 import com.analoja.artesanato.exceptions.RegraDeNegocioException;
 import com.analoja.artesanato.services.AvaliacaoService;
@@ -26,25 +27,25 @@ public class AvaliacaoController {
     }
 
     @GetMapping("/{idAvaliacao}")
-    public ResponseEntity<Avaliacao> buscarAvaliacaoPorId(Integer idAvaliacao) throws RegraDeNegocioException {
+    public ResponseEntity<Avaliacao> buscarAvaliacaoPorId(@PathVariable Integer idAvaliacao) throws RegraDeNegocioException {
         Avaliacao avaliacao = avaliacaoService.buscarAvaliacaoPorId(idAvaliacao);
         return new ResponseEntity<>(avaliacao, HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Avaliacao> criarAvaliacao(Avaliacao avaliacao) throws RegraDeNegocioException {
+    public ResponseEntity<Avaliacao> criarAvaliacao(@RequestBody AvaliacaoCreateDTO avaliacao) throws RegraDeNegocioException {
         Avaliacao avaliacaoCriada = avaliacaoService.criarAvaliacao(avaliacao);
         return new ResponseEntity<>(avaliacaoCriada, HttpStatus.CREATED);
     }
 
-    @PutMapping
-    public ResponseEntity<Avaliacao> atualizarAvaliacao(Integer idAvaliacao, Avaliacao avaliacao) throws RegraDeNegocioException {
+    @PutMapping("/{idAvaliacao}")
+    public ResponseEntity<Avaliacao> atualizarAvaliacao(@PathVariable Integer idAvaliacao, @RequestBody AvaliacaoCreateDTO avaliacao) throws RegraDeNegocioException {
         Avaliacao avaliacaoAtualizada = avaliacaoService.atualizarAvaliacao(idAvaliacao, avaliacao);
         return new ResponseEntity<>(avaliacaoAtualizada, HttpStatus.OK);
     }
 
     @GetMapping("/deletar/{idAvaliacao}")
-    public void deletarAvaliacao(Integer idAvaliacao) throws RegraDeNegocioException {
+    public void deletarAvaliacao(@PathVariable Integer idAvaliacao) throws RegraDeNegocioException {
         avaliacaoService.deletarAvaliacao(idAvaliacao);
     }
 }
