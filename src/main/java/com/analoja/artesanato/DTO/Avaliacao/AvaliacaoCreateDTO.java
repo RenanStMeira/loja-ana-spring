@@ -12,9 +12,6 @@ import java.util.Date;
 public class AvaliacaoCreateDTO {
 
     @NotNull
-    private Cliente cliente;
-
-    @NotNull
     private Produto produto;
 
     @NotNull
@@ -28,4 +25,8 @@ public class AvaliacaoCreateDTO {
     @NotNull
     @Schema(description = "Data da avaliação", example = "2021-10-10")
     private Date data;
+
+    public Integer getIdProduto() {
+        return this.produto.getIdProduto();
+    }
 }

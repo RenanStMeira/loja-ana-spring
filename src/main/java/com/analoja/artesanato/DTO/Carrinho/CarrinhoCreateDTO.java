@@ -20,4 +20,12 @@ public class CarrinhoCreateDTO {
     @NotNull
     @Schema(description = "Quantidade de produtos", example = "1")
     private Integer quantidade;
+
+    public Integer getClienteId() {
+        return cliente.getIdCliente();
+    }
+
+    public Integer getProdutoId() {
+        return produto.getIdProduto();
+    }
 }

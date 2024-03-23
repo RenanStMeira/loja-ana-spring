@@ -23,7 +23,6 @@ public class Avaliacao {
 
     @ManyToOne
     @JoinColumn(name = "produto_id")
-
     private Produto produto;
 
     @Column(name = "PONTUACAO")

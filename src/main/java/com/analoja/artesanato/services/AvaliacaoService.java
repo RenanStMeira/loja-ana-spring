@@ -19,7 +19,6 @@ public class AvaliacaoService {
 
     public Avaliacao criarAvaliacao(AvaliacaoCreateDTO avaliacaoDTO) throws RegraDeNegocioException {
         Avaliacao avaliacao = new Avaliacao();
-        avaliacao.setCliente(avaliacaoDTO.getCliente());
         avaliacao.setProduto(avaliacaoDTO.getProduto());
         avaliacao.setPontuacao(avaliacaoDTO.getPontuacao());
         avaliacao.setTexto(avaliacaoDTO.getTexto());
@@ -32,7 +31,6 @@ public class AvaliacaoService {
         Avaliacao avaliacao = avaliacaoRepository.findById(idAvaliacao)
                 .orElseThrow(() -> new RegraDeNegocioException("Avaliação não encontrada"));
 
-        avaliacao.setCliente(avaliacaoDTO.getCliente());
         avaliacao.setProduto(avaliacaoDTO.getProduto());
         avaliacao.setPontuacao(avaliacaoDTO.getPontuacao());
         avaliacao.setTexto(avaliacaoDTO.getTexto());
