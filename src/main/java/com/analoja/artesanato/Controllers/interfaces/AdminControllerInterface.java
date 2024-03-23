@@ -1,6 +1,7 @@
 package com.analoja.artesanato.Controllers.interfaces;
 
 import com.analoja.artesanato.DTO.Admin.AdminCreateDTO;
+import com.analoja.artesanato.DTO.Cliente.MensagemDTO;
 import com.analoja.artesanato.entity.Admin;
 import com.analoja.artesanato.exceptions.RegraDeNegocioException;
 import io.swagger.v3.oas.annotations.Operation;
@@ -47,7 +48,7 @@ public interface AdminControllerInterface {
             @ApiResponse(responseCode = "500", description = "An exception occurred")
     })
     @PostMapping("/create")
-    ResponseEntity<Admin> create(@Valid @RequestBody AdminCreateDTO adminDTO) throws RegraDeNegocioException;
+    ResponseEntity<MensagemDTO> create(@Valid @RequestBody AdminCreateDTO adminDTO) throws RegraDeNegocioException;
 
     @Operation(summary = "Update an existing admin")
     @ApiResponses(value = {
@@ -57,7 +58,7 @@ public interface AdminControllerInterface {
             @ApiResponse(responseCode = "500", description = "An exception occurred")
     })
     @PutMapping("/update/{id}")
-    ResponseEntity<Admin> update(@PathVariable Integer id, @Valid @RequestBody AdminCreateDTO adminDTO) throws RegraDeNegocioException;
+    ResponseEntity<MensagemDTO> update(@PathVariable Integer id, @Valid @RequestBody AdminCreateDTO adminDTO) throws RegraDeNegocioException;
 
     @Operation(summary = "Delete an admin")
     @ApiResponses(value = {
@@ -66,5 +67,5 @@ public interface AdminControllerInterface {
             @ApiResponse(responseCode = "500", description = "An exception occurred")
     })
     @DeleteMapping("/delete/{id}")
-    ResponseEntity<?> delete(@PathVariable Integer id) throws RegraDeNegocioException;
+    ResponseEntity<MensagemDTO> delete(@PathVariable Integer id) throws RegraDeNegocioException;
 }

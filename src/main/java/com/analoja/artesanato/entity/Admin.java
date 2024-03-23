@@ -1,6 +1,7 @@
 package com.analoja.artesanato.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -22,9 +23,13 @@ public class Admin {
     @Column(name = "NOME")
     private String nome;
 
-    @Column(name = "EMAIL")
+    @Column(name = "EMAIL", unique = true)
     private String email;
 
     @Column(name = "SENHA")
     private String senha;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "endereco_id", referencedColumnName = "id")
+    private Endereco endereco;
 }

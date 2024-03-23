@@ -1,8 +1,9 @@
 package com.analoja.artesanato.Controllers;
 
 import com.analoja.artesanato.Controllers.interfaces.CarrinhoControllerInterface;
+import com.analoja.artesanato.Controllers.interfaces.ClienteControllerInterface;
 import com.analoja.artesanato.DTO.Cliente.ClienteCreateDTO;
-import com.analoja.artesanato.DTO.Cliente.ClienteResponseDTO;
+import com.analoja.artesanato.DTO.Cliente.MensagemDTO;
 import com.analoja.artesanato.entity.Cliente;
 import com.analoja.artesanato.exceptions.RegraDeNegocioException;
 import com.analoja.artesanato.services.ClienteService;
@@ -20,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @Tag(name = "Cliente", description = "Endpoint de Cliente")
 @RequestMapping("/cliente")
-public class ClienteController implements CarrinhoControllerInterface {
+public class ClienteController implements ClienteControllerInterface {
 
     private final ClienteService clienteService;
 
@@ -49,14 +50,14 @@ public class ClienteController implements CarrinhoControllerInterface {
     }
 
     @PostMapping("/cadastrar")
-    public ResponseEntity<ClienteResponseDTO> cadatrarClienteResponseEntity(@RequestBody ClienteCreateDTO clienteCreateDTO) throws RegraDeNegocioException {
-        ClienteResponseDTO cliente = clienteService.cadastrarCliente(clienteCreateDTO);
+    public ResponseEntity<MensagemDTO> cadatrarClienteResponseEntity(@RequestBody ClienteCreateDTO clienteCreateDTO) throws RegraDeNegocioException {
+        MensagemDTO cliente = clienteService.cadastrarCliente(clienteCreateDTO);
         return new ResponseEntity<>(cliente, HttpStatus.CREATED);
     }
 
     @PutMapping("/atualizar/{idCliente}")
-    public ResponseEntity<Cliente> atualizarClienteResponseEntity(@PathVariable Integer idCliente, @RequestBody ClienteCreateDTO clienteCreateDTO) throws RegraDeNegocioException {
-        Cliente cliente = clienteService.atualizarCliente(idCliente, clienteCreateDTO);
+    public ResponseEntity<MensagemDTO> atualizarClienteResponseEntity(@PathVariable Integer idCliente, @RequestBody ClienteCreateDTO clienteCreateDTO) throws RegraDeNegocioException {
+        MensagemDTO cliente = clienteService.atualizarCliente(idCliente, clienteCreateDTO);
         return new ResponseEntity<>(cliente, HttpStatus.OK);
     }
 

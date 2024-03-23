@@ -15,6 +15,9 @@ public class Endereco {
     private Integer idEndereco;
 
     @OneToOne(mappedBy = "endereco")
+    private Admin admin;
+
+    @OneToOne(mappedBy = "endereco")
     @JsonBackReference
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
@@ -33,9 +36,5 @@ public class Endereco {
 
     @Column(name = "CEP")
     private String cep;
-
-    @ManyToOne
-    @JoinColumn(name = "admin_id", referencedColumnName = "ID")
-    private Admin admin;
 
 }

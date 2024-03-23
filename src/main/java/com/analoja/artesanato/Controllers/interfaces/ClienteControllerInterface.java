@@ -1,7 +1,7 @@
 package com.analoja.artesanato.Controllers.interfaces;
 
 import com.analoja.artesanato.DTO.Cliente.ClienteCreateDTO;
-import com.analoja.artesanato.DTO.Cliente.ClienteResponseDTO;
+import com.analoja.artesanato.DTO.Cliente.MensagemDTO;
 import com.analoja.artesanato.entity.Cliente;
 import com.analoja.artesanato.exceptions.RegraDeNegocioException;
 import io.swagger.v3.oas.annotations.Operation;
@@ -56,7 +56,7 @@ public interface ClienteControllerInterface {
             @ApiResponse(responseCode = "500", description = "An exception occurred")
     })
     @PostMapping("/cadastrar")
-    ResponseEntity<ClienteResponseDTO> cadatrarClienteResponseEntity(@RequestBody ClienteCreateDTO clienteCreateDTO) throws RegraDeNegocioException;
+    ResponseEntity<MensagemDTO> cadatrarClienteResponseEntity(@RequestBody ClienteCreateDTO clienteCreateDTO) throws RegraDeNegocioException;
 
     @Operation(summary = "Update an existing client")
     @ApiResponses(value = {
@@ -66,7 +66,7 @@ public interface ClienteControllerInterface {
             @ApiResponse(responseCode = "500", description = "An exception occurred")
     })
     @PutMapping("/atualizar/{idCliente}")
-    ResponseEntity<Cliente> atualizarClienteResponseEntity(@PathVariable Integer idCliente, @RequestBody ClienteCreateDTO clienteCreateDTO) throws RegraDeNegocioException;
+    ResponseEntity<MensagemDTO> atualizarClienteResponseEntity(@PathVariable Integer idCliente, @RequestBody ClienteCreateDTO clienteCreateDTO) throws RegraDeNegocioException;
 
     @DeleteMapping("/deletar/{idCliente}")
     ResponseEntity<Void> deletarClienteResponseEntity(@PathVariable Integer idCliente) throws RegraDeNegocioException;

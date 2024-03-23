@@ -1,5 +1,6 @@
 package com.analoja.artesanato.DTO.Admin;
 
+import com.analoja.artesanato.DTO.Endereco.EnderecoCreateDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -20,4 +21,7 @@ AdminCreateDTO {
     @NotNull
     @Schema(description = "Senha do administrador", example = "123456", required = true)
     private String senha;
+
+    private EnderecoCreateDTO endereco;
+
 }

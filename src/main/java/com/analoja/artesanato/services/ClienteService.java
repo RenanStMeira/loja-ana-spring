@@ -1,9 +1,10 @@
 package com.analoja.artesanato.services;
 
 import com.analoja.artesanato.DTO.Cliente.ClienteCreateDTO;
-import com.analoja.artesanato.DTO.Cliente.ClienteResponseDTO;
+import com.analoja.artesanato.DTO.Cliente.MensagemDTO;
 import com.analoja.artesanato.entity.Cliente;
 import com.analoja.artesanato.entity.Endereco;
+import com.analoja.artesanato.enums.MensagemRetorno;
 import com.analoja.artesanato.exceptions.RegraDeNegocioException;
 import com.analoja.artesanato.repository.ClienteRepository;
 import com.analoja.artesanato.repository.EnderecoRepository;
@@ -33,14 +34,8 @@ public class ClienteService {
     private static final String CPF_NAO_ENCONTRADO = "CPF não encontrado";
     private static final String EMAIL_NAO_ENCONTRADO = "Email não encontrado";
 
-
-
-    public Optional<Cliente> findByLogin(String username) {
-        return clienteRepository.findByLogin(username);
-    }
-
     @Transactional
-    public ClienteResponseDTO cadastrarCliente(ClienteCreateDTO clienteDTO) throws RegraDeNegocioException {
+    public MensagemDTO cadastrarCliente(ClienteCreateDTO clienteDTO) throws RegraDeNegocioException {
         Cliente cliente = new Cliente();
         Endereco endereco = new Endereco();
 
@@ -65,10 +60,11 @@ public class ClienteService {
         Endereco savedEndereco = enderecoRepository.save(endereco);
 
         savedCliente.setEndereco(savedEndereco);
-        return objectMapper.convertValue(clienteRepository.save(savedCliente), ClienteResponseDTO.class);
+        return new MensagemDTO(MensagemRetorno.CADASTRO_COM_SUCESSO.getMensagemRetorno(), savedCliente.getIdCliente());
     }
 
-    public Cliente atualizarCliente(Integer idCliente, ClienteCreateDTO clienteDTO) throws RegraDeNegocioException {
+
+    public MensagemDTO atualizarCliente(Integer idCliente, ClienteCreateDTO clienteDTO) throws RegraDeNegocioException {
         existsId(idCliente);
 
         Cliente clienteRecuperado = buscarPorId(idCliente);
@@ -93,7 +89,7 @@ public class ClienteService {
 
         clienteRecuperado.setEndereco(savedEndereco);
 
-        return clienteRepository.save(clienteRecuperado);
+        return new MensagemDTO(MensagemRetorno.EDITADO_COM_SUCESSO.getMensagemRetorno(), clienteRecuperado.getIdCliente());
     }
 
     public Cliente buscarClientePorCpf(String cpf) throws RegraDeNegocioException {
@@ -145,4 +141,7 @@ public class ClienteService {
                 .orElseThrow(() -> new RegraDeNegocioException(EMAIL_NAO_ENCONTRADO));
     }
 
+    public Optional<Cliente> findByLogin(String username) {
+        return clienteRepository.findByEmail(username);
+    }
 }
