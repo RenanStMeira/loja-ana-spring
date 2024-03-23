@@ -1,10 +1,12 @@
 package com.analoja.artesanato.Controllers;
 
+import com.analoja.artesanato.Controllers.interfaces.EnderecoControllerInterface;
 import com.analoja.artesanato.DTO.Endereco.EnderecoCreateDTO;
 import com.analoja.artesanato.DTO.Endereco.EnderecoResponseDTO;
 import com.analoja.artesanato.entity.Endereco;
 import com.analoja.artesanato.exceptions.RegraDeNegocioException;
 import com.analoja.artesanato.services.EnderecoService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +18,9 @@ import java.util.List;
 @RestController
 @Validated
 @RequiredArgsConstructor
+@Tag(name = "Endereco", description = "Endpoint de Endereco")
 @RequestMapping("/endereco")
-public class EnderecoConroller {
+public class EnderecoConroller implements EnderecoControllerInterface {
 
     private final EnderecoService enderecoService;
 

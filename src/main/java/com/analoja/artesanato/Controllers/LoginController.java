@@ -1,6 +1,7 @@
 package com.analoja.artesanato.Controllers;
 
 
+import com.analoja.artesanato.Controllers.interfaces.LoginControllerInterface;
 import com.analoja.artesanato.DTO.Login.LoginDTO;
 import com.analoja.artesanato.entity.Cliente;
 import com.analoja.artesanato.exceptions.RegraDeNegocioException;
@@ -27,10 +28,10 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/Login")
 @Validated
-@Tag(name = "Autenticação", description = "Endpoint de Autenticação")
+@Tag(name = "Login", description = "Endpoint de Login")
 @RequiredArgsConstructor
 @Slf4j
-public class LoginController {
+public class LoginController implements LoginControllerInterface {
 
     private final TokenService tokenService;
     private final AuthenticationManager authenticationManager;

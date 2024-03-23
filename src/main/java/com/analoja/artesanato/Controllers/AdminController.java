@@ -1,9 +1,11 @@
 package com.analoja.artesanato.Controllers;
 
+import com.analoja.artesanato.Controllers.interfaces.AdminControllerInterface;
 import com.analoja.artesanato.DTO.Admin.AdminCreateDTO;
 import com.analoja.artesanato.entity.Admin;
 import com.analoja.artesanato.exceptions.RegraDeNegocioException;
 import com.analoja.artesanato.services.AdminService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +18,9 @@ import java.util.List;
 @RestController
 @Validated
 @RequiredArgsConstructor
+@Tag(name = "Admin", description = "Endpoint Para Admin")
 @RequestMapping("/admin")
-public class AdminController {
+public class AdminController implements AdminControllerInterface {
 
     private final AdminService adminService;
 

@@ -1,9 +1,11 @@
 package com.analoja.artesanato.Controllers;
 
+import com.analoja.artesanato.Controllers.interfaces.PagamentoControllerInterface;
 import com.analoja.artesanato.DTO.Pagamento.PagamentoCreateDTO;
 import com.analoja.artesanato.entity.Pagamento;
 import com.analoja.artesanato.exceptions.RegraDeNegocioException;
 import com.analoja.artesanato.services.PagamentoService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,8 +15,9 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @Validated
 @RequiredArgsConstructor
+@Tag(name = "Pagamento", description = "Endpoint de Pagamento")
 @RequestMapping("/pagamento")
-public class PagamentoController {
+public class PagamentoController implements PagamentoControllerInterface {
 
     private final PagamentoService pagamentoService;
 

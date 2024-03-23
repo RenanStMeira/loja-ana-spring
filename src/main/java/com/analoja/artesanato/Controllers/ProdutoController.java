@@ -1,11 +1,13 @@
 package com.analoja.artesanato.Controllers;
 
+import com.analoja.artesanato.Controllers.interfaces.ProdutoControllerInterface;
 import com.analoja.artesanato.DTO.Produto.ProdutoCreateDTO;
 import com.analoja.artesanato.entity.Produto;
 import com.analoja.artesanato.enums.Categoria;
 import com.analoja.artesanato.enums.Cor;
 import com.analoja.artesanato.exceptions.RegraDeNegocioException;
 import com.analoja.artesanato.services.ProdutoService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,8 +21,9 @@ import javax.validation.Valid;
 @RestController
 @Validated
 @RequiredArgsConstructor
+@Tag(name = "Produto", description = "Endpoint de Produto")
 @RequestMapping("/produto")
-public class ProdutoController {
+public class ProdutoController implements ProdutoControllerInterface {
 
     private final ProdutoService produtoService;
 

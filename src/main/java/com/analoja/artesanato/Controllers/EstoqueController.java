@@ -1,8 +1,10 @@
 package com.analoja.artesanato.Controllers;
 
+import com.analoja.artesanato.Controllers.interfaces.EstoqueControllerInterface;
 import com.analoja.artesanato.DTO.Estoque.EstoqueCreateDTO;
 import com.analoja.artesanato.entity.Estoque;
 import com.analoja.artesanato.services.EstoqueService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +16,9 @@ import javax.validation.Valid;
 @RestController
 @Validated
 @RequiredArgsConstructor
+@Tag(name = "Estoque", description = "Endpoint de Estoque")
 @RequestMapping("/estoque")
-public class EstoqueController {
+public class EstoqueController implements EstoqueControllerInterface {
 
     private final EstoqueService estoqueService;
 

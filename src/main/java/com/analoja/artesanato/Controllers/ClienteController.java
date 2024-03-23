@@ -1,10 +1,12 @@
 package com.analoja.artesanato.Controllers;
 
+import com.analoja.artesanato.Controllers.interfaces.CarrinhoControllerInterface;
 import com.analoja.artesanato.DTO.Cliente.ClienteCreateDTO;
 import com.analoja.artesanato.DTO.Cliente.ClienteResponseDTO;
 import com.analoja.artesanato.entity.Cliente;
 import com.analoja.artesanato.exceptions.RegraDeNegocioException;
 import com.analoja.artesanato.services.ClienteService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,8 +18,9 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @Validated
 @RequiredArgsConstructor
+@Tag(name = "Cliente", description = "Endpoint de Cliente")
 @RequestMapping("/cliente")
-public class ClienteController {
+public class ClienteController implements CarrinhoControllerInterface {
 
     private final ClienteService clienteService;
 

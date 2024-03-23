@@ -1,9 +1,11 @@
 package com.analoja.artesanato.Controllers;
 
+import com.analoja.artesanato.Controllers.interfaces.AvaliacaoControllerInterface;
 import com.analoja.artesanato.DTO.Avaliacao.AvaliacaoCreateDTO;
 import com.analoja.artesanato.entity.Avaliacao;
 import com.analoja.artesanato.exceptions.RegraDeNegocioException;
 import com.analoja.artesanato.services.AvaliacaoService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,8 +17,9 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @Validated
 @RequiredArgsConstructor
+@Tag(name = "Avaliação", description = "Endpoint de Avaliação")
 @RequestMapping("/avaliacao")
-public class AvaliacaoController {
+public class AvaliacaoController implements AvaliacaoControllerInterface {
 
     private final AvaliacaoService avaliacaoService;
 

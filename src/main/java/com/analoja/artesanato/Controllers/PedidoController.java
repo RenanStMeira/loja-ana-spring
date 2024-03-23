@@ -1,9 +1,11 @@
 package com.analoja.artesanato.Controllers;
 
+import com.analoja.artesanato.Controllers.interfaces.PedidoControllerInterface;
 import com.analoja.artesanato.DTO.Pedido.PedidoCreateDTO;
 import com.analoja.artesanato.entity.Pedido;
 import com.analoja.artesanato.exceptions.RegraDeNegocioException;
 import com.analoja.artesanato.services.PedidoService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,8 +15,9 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @Validated
 @RequiredArgsConstructor
+@Tag(name = "Pedido", description = "Endpoint de Pedido")
 @RequestMapping("/pedido")
-public class PedidoController {
+public class PedidoController implements PedidoControllerInterface {
 
     private final PedidoService pedidoService;
 

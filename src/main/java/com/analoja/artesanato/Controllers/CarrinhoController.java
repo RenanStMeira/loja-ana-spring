@@ -1,9 +1,11 @@
 package com.analoja.artesanato.Controllers;
 
+import com.analoja.artesanato.Controllers.interfaces.CarrinhoControllerInterface;
 import com.analoja.artesanato.DTO.Carrinho.CarrinhoCreateDTO;
 import com.analoja.artesanato.entity.Carrinho;
 import com.analoja.artesanato.exceptions.RegraDeNegocioException;
 import com.analoja.artesanato.services.CarrinhoService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -12,8 +14,9 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @Validated
 @RequiredArgsConstructor
+@Tag(name = "Carrinho", description = "Endpoint de Carrinho")
 @RequestMapping("/carrinho")
-public class CarrinhoController {
+public class CarrinhoController implements CarrinhoControllerInterface {
 
     private final CarrinhoService carrinhoService;
 
