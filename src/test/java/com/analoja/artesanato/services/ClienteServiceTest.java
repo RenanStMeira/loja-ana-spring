@@ -98,4 +98,17 @@ class ClienteServiceTest {
 
         assertEquals(cliente, clienteRecuperado);
     }
+
+    @DisplayName("Testar buscar cliente por cpf")
+    @Test
+    void testaBuscarClientePorCpf() throws RegraDeNegocioException {
+        Cliente cliente = MockCliente.retornaClienteEntity();
+        cliente.setCpf("12345678901");
+
+        when(clienteRepository.findByCpf(any(String.class))).thenReturn(Optional.of(cliente));
+
+        Cliente clienteRecuperado = clienteService.buscarClientePorCpf("12345678901");
+
+        assertEquals(cliente, clienteRecuperado);
+    }
 }
