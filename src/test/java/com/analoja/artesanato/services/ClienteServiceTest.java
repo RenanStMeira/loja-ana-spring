@@ -111,4 +111,18 @@ class ClienteServiceTest {
 
         assertEquals(cliente, clienteRecuperado);
     }
+
+    @DisplayName("Testar buscar cliente por email")
+    @Test
+    void testBuscarClientePorEmail() throws RegraDeNegocioException {
+        Cliente cliente = MockCliente.retornaClienteEntity();
+        cliente.setEmail("test@email.com");
+
+        when(clienteRepository.findByEmail(any(String.class))).thenReturn(Optional.of(cliente));
+
+        Cliente clienteRecuperado = clienteService.buscarClientePorEmail("test@email.com");
+
+        assertEquals(cliente, clienteRecuperado);
+
+    }
 }
