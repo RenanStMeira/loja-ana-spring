@@ -1,7 +1,6 @@
 package com.analoja.artesanato.services;
 
 import com.analoja.artesanato.DTO.Cliente.ClienteCreateDTO;
-import com.analoja.artesanato.DTO.Cliente.ClienteResponseDTO;
 import com.analoja.artesanato.DTO.Cliente.MensagemDTO;
 import com.analoja.artesanato.MockCliente;
 import com.analoja.artesanato.entity.Cliente;
@@ -24,6 +23,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -84,5 +84,18 @@ class ClienteServiceTest {
 
         assertEquals(clienteExistente.getIdCliente(), clienteAtualizado.getId());
         assertEquals("Cliente Editado com sucesso", clienteAtualizado.getMensagem());
+    }
+
+    @DisplayName("Teste para buscar um cliente por ID")
+    @Test
+    void testBuscarClientePorId() throws RegraDeNegocioException {
+        Cliente cliente = MockCliente.retornaClienteEntity();
+        cliente.setIdCliente(1);
+
+        when(clienteRepository.findById(anyInt())).thenReturn(Optional.of(cliente));
+
+        Cliente clienteRecuperado = clienteService.buscarPorId(1);
+
+        assertEquals(cliente, clienteRecuperado);
     }
 }
