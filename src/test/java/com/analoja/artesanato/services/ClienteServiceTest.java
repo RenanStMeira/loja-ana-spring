@@ -154,4 +154,30 @@ class ClienteServiceTest {
 
         assertEquals(clientePage, result);
     }
+
+    @DisplayName("Testar deletar cliente")
+    @Test
+    void testDeletarUsuario() throws RegraDeNegocioException {
+        Cliente cliente = MockCliente.retornaClienteEntity();
+        Integer idCliente = 1;
+        cliente.setIdCliente(1);
+
+        when(clienteRepository.findById(idCliente)).thenReturn(Optional.of(cliente));
+
+        clienteService.deletarCliente(idCliente);
+
+        assertEquals(cliente, cliente);
+    }
+
+    @DisplayName("Testar buscar cliente por login")
+    @Test
+    void testBuscarClientePorLogin() {
+        Cliente cliente = MockCliente.retornaClienteEntity();
+
+        when(clienteRepository.findByEmail(any(String.class))).thenReturn(Optional.of(cliente));
+
+        Optional<Cliente> clienteRecuperado = clienteService.findByLogin("test");
+
+        assertEquals(cliente, clienteRecuperado.get());
+    }
 }
