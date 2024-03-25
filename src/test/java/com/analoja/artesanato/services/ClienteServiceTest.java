@@ -65,4 +65,24 @@ class ClienteServiceTest {
         assertEquals(cliente.getIdCliente(), result.getId());
         assertEquals("Cliente cadastrado com sucesso", result.getMensagem());
     }
+
+    @DisplayName("Teste atualizar um cliente")
+    @Test
+    void testAtualizarCliente() throws RegraDeNegocioException {
+        ClienteCreateDTO clienteDTO = MockCliente.retornaClienteCreateDTO();
+
+        Cliente cliente = MockCliente.retornaClienteEntity();
+
+        Cliente clienteExistente = MockCliente.retornaClienteEntity();
+
+        when(clienteRepository.findById(clienteExistente.getIdCliente())).thenReturn(Optional.of(clienteExistente));
+        when(clienteRepository.save(any(Cliente.class))).thenReturn(cliente);
+
+        clienteRepository.save(clienteExistente);
+
+        MensagemDTO clienteAtualizado = clienteService.atualizarCliente(clienteExistente.getIdCliente(), clienteDTO);
+
+        assertEquals(clienteExistente.getIdCliente(), clienteAtualizado.getId());
+        assertEquals("Cliente Editado com sucesso", clienteAtualizado.getMensagem());
+    }
 }
