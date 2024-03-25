@@ -3,9 +3,11 @@ package com.analoja.artesanato.DTO.Cliente;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 
 @Data
 @AllArgsConstructor
+@Getter
 public class MensagemDTO {
 
     @Schema(example = "Cadastro realizado com sucesso")
@@ -17,4 +19,6 @@ public class MensagemDTO {
     public MensagemDTO(String mensagem){
         this.mensagem = mensagem;
     }
+
+
 }

@@ -10,7 +10,7 @@ import java.util.Random;
 
 public class MockCliente {
 
-    public static Cliente retornaPessoaEntity() {
+    public static Cliente retornaClienteEntity() {
         Cliente cliente = new Cliente();
         cliente.setIdCliente(new Random().nextInt());
         cliente.setNome("Nome");
@@ -44,7 +44,7 @@ public class MockCliente {
         clienteCreateDTO.setEmail("teste@email.com");
         clienteCreateDTO.setSenha("senha123");
 
-        EnderecoCreateDTO endereco = new EnderecoCreateDTO("Rua", 123, "Cidade", "Estado", "12345678");
+        EnderecoCreateDTO endereco = new EnderecoCreateDTO(1, "Rua", 123, "Cidade", "Estado", "12345678");
 
         clienteCreateDTO.setEndereco(endereco);
 
