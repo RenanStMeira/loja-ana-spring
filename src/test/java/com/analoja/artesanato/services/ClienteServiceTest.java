@@ -17,14 +17,21 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
+import static org.postgresql.hostchooser.HostRequirement.any;
 
 @ExtendWith(MockitoExtension.class)
 class ClienteServiceTest {
@@ -124,5 +131,27 @@ class ClienteServiceTest {
 
         assertEquals(cliente, clienteRecuperado);
 
+    }
+
+    @DisplayName("Testar buscar todos os cliente")
+    @Test
+    void testBuscarTodosClientes() throws RegraDeNegocioException {
+        Pageable pageable = PageRequest.of(0,10);
+
+        List<Cliente> clientes = new ArrayList<>();
+
+        for(int i =0; i < 10; i++) {
+            Cliente c = new Cliente();
+            c.setIdCliente(i);
+            clientes.add(c);
+        }
+
+        Page<Cliente> clientePage = new PageImpl<>(clientes);
+
+        when(clienteRepository.findAll(any(Pageable.class))).thenReturn(clientePage);
+
+        Page<Cliente> result = clienteService.buscarTodosClientes(pageable);
+
+        assertEquals(clientePage, result);
     }
 }
